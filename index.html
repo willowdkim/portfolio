@@ -428,6 +428,7 @@
     margin-bottom: 20px;
   }
   .intro-pitch { color: var(--silk-dim); font-size: 16px; line-height: 1.6; }
+  .intro-pitch em { font-style: italic; color: var(--silk-dim); opacity: 0.92; }
 
   .pin-list {
     display: flex; flex-wrap: wrap; gap: 8px;
@@ -527,6 +528,7 @@
     margin-bottom: 20px;
     padding-left: 24px;
   }
+  .sub-ic p.body em { font-style: italic; color: var(--silk-dim); opacity: 0.92; }
   .sub-ic p.body {
     color: var(--silk);
     opacity: 0.85;
@@ -845,6 +847,59 @@
     letter-spacing: 0.13em;
   }
 
+  /* scroll progress LED */
+  #scroll-led {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  #scroll-led.visible { opacity: 1; }
+  .led-track {
+    width: 6px;
+    height: 120px;
+    border-radius: 4px;
+    background: #0e1a12;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), inset 0 2px 6px rgba(0,0,0,0.6);
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+  .led-fill {
+    width: 100%;
+    height: 0%;
+    background: linear-gradient(180deg, #ff8a8a 0%, var(--accent-hot) 60%, #b81f1f 100%);
+    box-shadow: 0 0 8px rgba(255,90,90,0.6);
+    transition: height 0.12s linear;
+  }
+  .led-bulb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffd0d0 0%, var(--accent-hot) 45%, #7a1010 100%);
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .led-bulb.lit {
+    box-shadow: 0 0 10px var(--accent-hot), 0 0 20px rgba(255,90,90,0.6), 0 0 30px rgba(255,90,90,0.3);
+  }
+  .led-pct {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--silk-dim);
+  }
+  @media (max-width: 640px) {
+    #scroll-led { right: 12px; bottom: 16px; }
+    .led-track { height: 90px; }
+  }
+
   /* badges (silkscreen style) */
   .badge {
     position: absolute;
@@ -1059,24 +1114,27 @@
         <div class="intro-role">JUNIOR ECE @ OHIO STATE // SEEKING SUMMER 2027 INTERNSHIP</div>
         <p class="intro-pitch">
           Hi! I'm an Electrical and Computer Engineering student at The Ohio State University
-          with hands-on experience in RF/analog circuits, wearable sensing systems, embedded
-          firmware, PCB design, and hardware verification.
+          with hands-on experience in <strong style="color:var(--silk)">RF/analog circuits,
+          wearable sensing systems, embedded firmware, PCB design, and hardware
+          verification</strong>.
         </p>
         <p class="intro-pitch" style="margin-top:14px;">
-          Through two years of <strong style="color:var(--silk)">wearable and implantable
-          technology</strong> research at the
-          <strong style="color:var(--silk)">ElectroScience Laboratory</strong> and internships
-          at Medtronic (<strong style="color:var(--silk)">early-stage R&amp;D</strong>) and
-          Johnson &amp; Johnson MedTech (<strong style="color:var(--silk)">late-stage product
-          development</strong>), I developed skills in board-level design, early-stage
-          prototyping, signal processing, debugging, VNA/oscilloscope validation, geometry
-          modeling, and regulated technical documentation.
+          Through two years of wearable and implantable technology research at the
+          <strong style="color:var(--silk)">ElectroScience Laboratory</strong>
+          (<em>Electrical Designer</em>) and internships at
+          <strong style="color:var(--silk)">Medtronic</strong>
+          (<em>early-stage R&amp;D</em>) and
+          <strong style="color:var(--silk)">Johnson &amp; Johnson MedTech</strong>
+          (<em>late-stage product development</em>), I developed skills in board-level design,
+          early-stage prototyping, signal processing, debugging, VNA/oscilloscope validation,
+          geometry modeling, and regulated technical documentation.
         </p>
         <p class="intro-pitch" style="margin-top:14px;">
-          I care about how a product directly affects the humans using it, and how it feels in
-          someone's hand. I originally studied neuroscience to understand how the mind influences
-          us, and I became drawn to the things that influence and interface with people from the
-          outside. I transitioned into ECE in Fall 2024, and I've been chasing that ever since.
+          I care about how a product affects the people using it; how it feels in their hands.
+          I originally studied neuroscience, drawn to how the brain operates and what shapes it.
+          That interest pulled me toward technologies that interface with people from the
+          outside. I transitioned into ECE in Fall 2024, and I've been building toward that
+          intersection ever since.
         </p>
 
         <div class="contact-row">
@@ -1194,25 +1252,31 @@
     <div class="content-grid">
       <div>
         <p class="body">
-          Worked on the DUALTO&trade; Surgical Robotics Energy System team, supported calibration
-          fixture testing, verification, and technical documentation for internal engineering
-          use. My work included creating operating procedures, contributing to software
-          validation documentation, and collecting test case data to support fixture
-          verification, with documentation formally reviewed and signed through the team's
-          internal document-control process.
+          Worked on the DUALTO&trade; Surgical Robotics Energy System team, supporting
+          calibration fixture testing, verification, and technical documentation for internal
+          engineering use. I created <strong style="color:var(--silk)">regulated technical
+          documentation</strong> such as <em>operating procedures, software validation
+          documentation, and test case data</em> to support fixture verification. These are
+          formally reviewed and signed through the team's internal document-control process. I
+          conducted <strong style="color:var(--silk)">failure analysis on the fixture module,
+          successfully identifying issues and debugging</strong> the module.
         </p>
         <p class="body">
-          Alongside the fixture work, I got to design a 4-layer ATmega32u4 development board,
-          where I gained skills in board design with KiCad and constructed a design plan within
-          a set time frame, including block diagram development, schematic design, PCB layout,
-          assembly, and bootloader flashing. This board is detailed further in the Projects
-          section below.
+          Alongside the fixture work, I had a great opportunity to
+          <strong style="color:var(--silk)">design a 4-layer ATmega32u4 development board</strong>.
+          As my very first dev board design experience, I learned the
+          <strong style="color:var(--silk)">whole board design workflow in KiCad</strong>. I
+          constructed a design plan within a set time frame, including <em>block diagram
+          development, schematic design, PCB layout, component research and ordering, assembly,
+          and bootloader flashing</em>. This board is detailed further in the Projects section
+          below. Demo video is attached.
         </p>
 
         <div class="strip">SKILL PINS</div>
         <div class="pin-list">
           <span class="pin-tag">CALIBRATION FIXTURE TESTING</span>
           <span class="pin-tag">VERIFICATION</span>
+          <span class="pin-tag">FAILURE ANALYSIS / DEBUGGING</span>
           <span class="pin-tag">SW VALIDATION DOCUMENTATION</span>
           <span class="pin-tag">OPERATING PROCEDURES</span>
           <span class="pin-tag">TEST CASE DATA COLLECTION</span>
@@ -1860,12 +1924,49 @@
   DESIGNED &amp; SOLDERED WITH <span class="heart">●</span> BY WILLOW KIM &nbsp; // &nbsp; PORTFOLIO REV A &nbsp; // &nbsp; 2026
 </footer>
 
+<!-- scroll progress LED -->
+<div id="scroll-led" aria-hidden="true" title="scroll progress">
+  <div class="led-track">
+    <div class="led-fill"></div>
+  </div>
+  <div class="led-bulb"></div>
+  <div class="led-pct mono">0%</div>
+</div>
+
 <div id="lightbox">
   <span class="close-hint">ESC / CLICK TO CLOSE</span>
   <img src="" alt="">
 </div>
 
 <script>
+  // scroll progress LED
+  (function(){
+    const led = document.getElementById('scroll-led');
+    if (!led) return;
+    const fill = led.querySelector('.led-fill');
+    const bulb = led.querySelector('.led-bulb');
+    const pct  = led.querySelector('.led-pct');
+    let ticking = false;
+    function update(){
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      const percent = Math.round(p * 100);
+      fill.style.height = percent + '%';
+      pct.textContent = percent + '%';
+      // bulb glows brighter the further down you are
+      bulb.style.opacity = (0.5 + p * 0.5).toFixed(2);
+      bulb.classList.toggle('lit', p > 0.02);
+      led.classList.toggle('visible', window.scrollY > 60);
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking){ requestAnimationFrame(update); ticking = true; }
+    }, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
   // lightbox for research media (any img with data-lightbox)
   const lb = document.getElementById('lightbox');
   const lbImg = lb.querySelector('img');
