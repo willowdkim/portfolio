@@ -847,6 +847,16 @@
     letter-spacing: 0.13em;
   }
 
+  #dev-board { scroll-margin-top: 90px; }
+
+  .jump-link {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .jump-link:hover { color: var(--trace-glow); border-bottom-color: var(--trace-glow); }
+
   /* scroll progress LED */
   #scroll-led {
     position: fixed;
@@ -1268,8 +1278,8 @@
           <strong style="color:var(--silk)">whole board design workflow in KiCad</strong>. I
           constructed a design plan within a set time frame, including <em>block diagram
           development, schematic design, PCB layout, component research and ordering, assembly,
-          and bootloader flashing</em>. This board is detailed further in the Projects section
-          below. Demo video is attached.
+          and bootloader flashing</em>. <a href="#dev-board" class="jump-link">This board is
+          detailed further in the Projects section below &rarr;</a> Demo video is attached.
         </p>
 
         <div class="strip">SKILL PINS</div>
@@ -1599,7 +1609,7 @@
   </div>
 
   <!-- JNJ Dev Board -->
-  <div class="sub-ic">
+  <div class="sub-ic" id="dev-board">
     <span class="dot-indicator"></span>
     <h2>4-LAYER DEV BOARD · ATmega32u4</h2>
     <div class="meta">CUSTOM PCB · J&amp;J MEDTECH CO-OP · SPRING 2026</div>
@@ -2027,6 +2037,20 @@
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     io.observe(el);
   });
+
+  // reveal + scroll to a jump target immediately (in-page links and deep links)
+  function revealTarget(el){
+    if (!el) return;
+    el.style.opacity = 1;
+    el.style.transform = 'translateY(0)';
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', () => {
+      const id = a.getAttribute('href').slice(1);
+      if (id) revealTarget(document.getElementById(id));
+    });
+  });
+  if (location.hash) revealTarget(document.getElementById(location.hash.slice(1)));
 </script>
 
 </body>
